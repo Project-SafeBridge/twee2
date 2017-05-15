@@ -13,15 +13,12 @@ module Twee2
       format_data_for_json = "\{#{format_data}\}"
       @source = JSON.parse(format_data_for_json)['source']
       @version = format_file.match(/(["'])version\1 *: *(["'])(.*?[^\\])\2/)[3]
+      @verbatim_name = format_file.match(/(["'])name\1 *: *(["'])(.*?[^\\])\2/)[3]
     end
 
     # Given a story file, injects it into the StoryFormat and returns the HTML results
     def compile
-      name = @name
-      if name == 'SugarCube2'
-        name = 'SugarCube'
-      end
-      @source.gsub('{{STORY_NAME}}', Twee2::build_config.story_name).gsub('{{STORY_DATA}}', Twee2::build_config.story_file.xmldata).gsub('{{STORY_FORMAT}}', @name).gsub('{{STORY_FORMAT_VERSION}}', @version)
+      @source.gsub('{{STORY_NAME}}', Twee2::build_config.story_name).gsub('{{STORY_DATA}}', Twee2::build_config.story_file.xmldata).gsub('{{STORY_FORMAT}}', @verbatim_name).gsub('{{STORY_FORMAT_VERSION}}', @version)
     end
 
     # Returns an array containing the known StoryFormat names
