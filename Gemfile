@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem 'json'
 gem 'thor'
 gem 'builder'
 gem 'filewatcher'
